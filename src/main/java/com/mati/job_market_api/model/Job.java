@@ -2,6 +2,8 @@ package com.mati.job_market_api.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "jobs")
@@ -109,5 +111,14 @@ public class Job {
     @Column(name = "link")
     private String link;
 
-    // Getters and setters — generate via IntelliJ (right-click → Generate → Getters and Setters)
+    @ManyToMany
+    @JoinTable(
+            name = "job_skills",
+            joinColumns = @JoinColumn(name = "job_id"),
+            inverseJoinColumns = @JoinColumn(name = "skill_id")
+    )
+    private Set<Skill> skills = new HashSet<>();
+
+    public Set<Skill> getSkills() { return skills; }
+    public void setSkills(Set<Skill> skills) { this.skills = skills; }
 }

@@ -2,7 +2,6 @@ package com.mati.job_market_api.controller;
 
 import com.mati.job_market_api.model.Company;
 import com.mati.job_market_api.repository.CompanyRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

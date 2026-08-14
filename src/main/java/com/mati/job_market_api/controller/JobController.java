@@ -2,7 +2,6 @@ package com.mati.job_market_api.controller;
 
 import com.mati.job_market_api.model.Job;
 import com.mati.job_market_api.repository.JobRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,6 +45,7 @@ public class JobController {
         job.setDatePosted(jobDetails.getDatePosted());
         job.setLink(jobDetails.getLink());
         job.setCompany(jobDetails.getCompany());
+        job.setSkills(jobDetails.getSkills());
 
         return jobRepository.save(job);
     }
