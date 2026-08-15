@@ -29,19 +29,31 @@ public class Contract {
         return contractId;
     }
 
-    public Job getJob() {
+    public void setContractId(Integer contractId){
+        this.contractId = contractId;
+    }
+
+    public Job getJob(){
         return job;
     }
 
-    public String getContractType() {
+    public void setJob(Job job){
+        this.job = job;
+    }
+
+    public String getContractType(){
         return contractType;
     }
 
-    public BigDecimal getSalaryMin() {
-        return salaryMin;
+    public void setContractType(String contractType){
+        this.contractType = contractType;
     }
 
-    public BigDecimal getSalaryMax() {
-        return salaryMax;
-    }
+    public BigDecimal getSalaryMin() { return salaryMin; }
+
+    public void setSalaryMin(BigDecimal salaryMin) { this.salaryMin = salaryMin; }
+
+    public BigDecimal getSalaryMax() { return salaryMax; }
+
+    public void setSalaryMax(BigDecimal salaryMax) { this.salaryMax = salaryMax; }
 }
