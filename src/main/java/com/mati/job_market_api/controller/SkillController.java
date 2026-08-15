@@ -47,4 +47,16 @@ public class SkillController {
     public void deleteSkill(@PathVariable Integer id) {
         skillRepository.deleteById(id);
     }
+
+    @PatchMapping("/{id}")
+    public Skill patchSkill(@PathVariable Integer id, @RequestBody Skill skillDetails) {
+        Skill skill = skillRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Skill not found with id " + id));
+
+        if (skillDetails.getName() != null) {
+            skill.setName(skillDetails.getName());
+        }
+
+        return skillRepository.save(skill);
+    }
 }

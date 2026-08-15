@@ -48,4 +48,25 @@ public class ContractController {
 
     @DeleteMapping("/{id}")
     public void deleteContract(@PathVariable Integer id) { contractRepository.deleteById(id);}
+
+    @PatchMapping("/{id}")
+    public Contract patchContract(@PathVariable Integer id, @RequestBody Contract contractDetails) {
+        Contract contract = contractRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Contract not found with id " + id));
+
+        if (contractDetails.getContractType() != null) {
+            contract.setContractType(contractDetails.getContractType());
+        }
+        if (contractDetails.getSalaryMin() != null) {
+            contract.setSalaryMin(contractDetails.getSalaryMin());
+        }
+        if (contractDetails.getSalaryMax() != null) {
+            contract.setSalaryMax(contractDetails.getSalaryMax());
+        }
+        if (contractDetails.getJob() != null) {
+            contract.setJob(contractDetails.getJob());
+        }
+
+        return contractRepository.save(contract);
+    }
 }

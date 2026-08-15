@@ -47,4 +47,16 @@ public class CompanyController {
     public void deleteCompany(@PathVariable Integer id){
         companyRepository.deleteById(id);
     }
+
+    @PatchMapping("/{id}")
+    public Company patchCompany(@PathVariable Integer id, @RequestBody Company companyDetails){
+        Company company = companyRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Company not found with id " + id));
+
+        if (companyDetails.getName() != null) {
+            company.setName(companyDetails.getName());
+        }
+
+        return companyRepository.save(company);
+    }
 }

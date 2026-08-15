@@ -55,4 +55,48 @@ public class JobController {
     public void deleteJob(@PathVariable Integer id) {
         jobRepository.deleteById(id);
     }
+
+    @PatchMapping("/{id}")
+    public Job patchJob(@PathVariable Integer id, @RequestBody Job jobDetails) {
+        Job job = jobRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Job not found with id " + id));
+
+        if (jobDetails.getTitle() != null) {
+            job.setTitle(jobDetails.getTitle());
+        }
+
+        if (jobDetails.getCity() != null) {
+            job.setCity(jobDetails.getCity());
+        }
+
+        if (jobDetails.getWorkModel() != null) {
+            job.setWorkModel(jobDetails.getWorkModel());
+        }
+
+        if (jobDetails.getSeniority() != null) {
+            job.setSeniority(jobDetails.getSeniority());
+        }
+
+        if (jobDetails.getSource() != null) {
+            job.setSource(jobDetails.getSource());
+        }
+
+        if (jobDetails.getDatePosted() != null) {
+            job.setDatePosted(jobDetails.getDatePosted());
+        }
+
+        if (jobDetails.getLink() != null) {
+            job.setLink(jobDetails.getLink());
+        }
+
+        if (jobDetails.getCompany() != null) {
+            job.setCompany(jobDetails.getCompany());
+        }
+
+        if (jobDetails.getSkills() != null) {
+            job.setSkills(jobDetails.getSkills());
+        }
+
+        return jobRepository.save(job);
+    }
 }
