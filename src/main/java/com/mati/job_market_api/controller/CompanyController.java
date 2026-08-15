@@ -3,6 +3,7 @@ package com.mati.job_market_api.controller;
 import com.mati.job_market_api.model.Company;
 import com.mati.job_market_api.repository.CompanyRepository;
 import org.springframework.web.bind.annotation.*;
+import com.mati.job_market_api.exception.ResourceNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +36,7 @@ public class CompanyController {
     @PutMapping("/{id}")
     public Company updateCompany(@PathVariable Integer id, @RequestBody Company companyDetails) {
         Company company = companyRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Company not found with id " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Company not found with id " + id));
 
         company.setName(companyDetails.getName());
 

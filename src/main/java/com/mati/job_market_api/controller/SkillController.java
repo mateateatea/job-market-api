@@ -3,6 +3,7 @@ package com.mati.job_market_api.controller;
 import com.mati.job_market_api.model.Skill;
 import com.mati.job_market_api.repository.SkillRepository;
 import org.springframework.web.bind.annotation.*;
+import com.mati.job_market_api.exception.ResourceNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +36,7 @@ public class SkillController {
     @PutMapping("/{id}")
     public Skill updateSkill(@PathVariable Integer id, @RequestBody Skill skillDetails) {
         Skill skill = skillRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Skill not found with id " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Skill not found with id " + id));
 
         skill.setName(skillDetails.getName());
 

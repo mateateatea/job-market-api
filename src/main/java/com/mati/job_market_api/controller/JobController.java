@@ -3,6 +3,7 @@ package com.mati.job_market_api.controller;
 import com.mati.job_market_api.model.Job;
 import com.mati.job_market_api.repository.JobRepository;
 import org.springframework.web.bind.annotation.*;
+import com.mati.job_market_api.exception.ResourceNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +36,7 @@ public class JobController {
     @PutMapping("/{id}")
     public Job updateJob(@PathVariable Integer id, @RequestBody Job jobDetails) {
         Job job = jobRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Job not found with id " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Job not found with id " + id));
 
         job.setTitle(jobDetails.getTitle());
         job.setCity(jobDetails.getCity());

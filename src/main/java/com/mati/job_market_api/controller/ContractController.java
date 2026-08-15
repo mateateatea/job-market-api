@@ -3,6 +3,7 @@ package com.mati.job_market_api.controller;
 import com.mati.job_market_api.model.Contract;
 import com.mati.job_market_api.repository.ContractRepository;
 import org.springframework.web.bind.annotation.*;
+import com.mati.job_market_api.exception.ResourceNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +36,7 @@ public class ContractController {
     @PutMapping("/{id}")
     public Contract updateContract(@PathVariable Integer id, @RequestBody Contract contractDetails) {
         Contract contract = contractRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Contract not found with id " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Contract not found with id " + id));
 
         contract.setJob(contractDetails.getJob());
         contract.setContractType(contractDetails.getContractType());
