@@ -1,62 +1,49 @@
 package com.mati.job_market_api.controller;
 
 import com.mati.job_market_api.model.Company;
-import com.mati.job_market_api.repository.CompanyRepository;
+import com.mati.job_market_api.service.CompanyService;
 import org.springframework.web.bind.annotation.*;
-import com.mati.job_market_api.exception.ResourceNotFoundException;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/companies")
 public class CompanyController {
 
-    private final CompanyRepository companyRepository;
+    private final CompanyService companyService;
 
-    public CompanyController(CompanyRepository companyRepository) {
-        this.companyRepository = companyRepository;
+    public CompanyController(CompanyService companyService) {
+        this.companyService = companyService;
     }
 
     @GetMapping
     public List<Company> getAllCompanies() {
-        return companyRepository.findAll();
+        return companyService.getAllCompanies();
     }
 
     @GetMapping("/{id}")
-    public Optional<Company> getCompanyById(@PathVariable Integer id) {
-        return companyRepository.findById(id);
+    public Company getCompanyById(@PathVariable Integer id) {
+        return companyService.getCompanyById(id);
     }
 
     @PostMapping
     public Company createCompany(@RequestBody Company company) {
-        return companyRepository.save(company);
+        return companyService.createCompany(company);
     }
 
     @PutMapping("/{id}")
-    public Company updateCompany(@PathVariable Integer id, @RequestBody Company companyDetails) {
-        Company company = companyRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Company not found with id " + id));
-
-        company.setName(companyDetails.getName());
-
-        return companyRepository.save(company);
+    public Company updateCompany(@PathVariable Integer id, @RequestBody Company companyDetails){
+        return companyService.updateCompany(id, companyDetails);
     }
 
     @DeleteMapping("/{id}")
     public void deleteCompany(@PathVariable Integer id){
-        companyRepository.deleteById(id);
+        companyService.deleteCompany(id);
     }
 
     @PatchMapping("/{id}")
-    public Company patchCompany(@PathVariable Integer id, @RequestBody Company companyDetails){
-        Company company = companyRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Company not found with id " + id));
-
-        if (companyDetails.getName() != null) {
-            company.setName(companyDetails.getName());
-        }
-
-        return companyRepository.save(company);
+    public Company patchCompany(@PathVariable Integer id, @RequestBody Company companyDetails) {
+        return companyService.patchCompany(id, companyDetails);
     }
 }
