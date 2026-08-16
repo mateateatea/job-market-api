@@ -4,6 +4,7 @@ import com.mati.job_market_api.model.Skill;
 import com.mati.job_market_api.repository.SkillRepository;
 import org.springframework.web.bind.annotation.*;
 import com.mati.job_market_api.exception.ResourceNotFoundException;
+import com.mati.job_market_api.model.SkillStat;
 
 import java.util.List;
 import java.util.Optional;
@@ -58,5 +59,10 @@ public class SkillController {
         }
 
         return skillRepository.save(skill);
+    }
+
+    @GetMapping("/stats")
+    public List<SkillStat> getSkillStats() {
+        return skillRepository.findSkillStats();
     }
 }
