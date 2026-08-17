@@ -22,7 +22,7 @@ jobs:
           cache: maven
 
       - name: Make mvnw executable
-        run: chmod +x mvnw -Dtest='!JobMarketApiApplicationTests'
+        run: chmod +x mvnw
 
       - name: Run tests
-        run: ./mvnw test
+        run: ./mvnw test -Dtest='!JobMarketApiApplicationTests'
