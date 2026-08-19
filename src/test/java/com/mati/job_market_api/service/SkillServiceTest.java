@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import com.mati.job_market_api.exception.ResourceNotFoundException;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.verify;
 
 import java.util.Optional;
 
@@ -56,5 +57,63 @@ class SkillServiceTest {
         Skill result = skillService.createSkill(skill);
 
         assertEquals("KUBERNETES", result.getName());
+    }
+
+    @Test
+    void updateSkill_updatesName_whenSkillExists() {
+        Skill existingSkill = new Skill();
+        existingSkill.setId(1);
+        existingSkill.setName("Java");
+
+        Skill skillDetails = new Skill();
+        skillDetails.setName("Python");
+
+        when(skillRepository.findById(1)).thenReturn(Optional.of(existingSkill));
+        when(skillRepository.save(existingSkill)).thenReturn(existingSkill);
+
+        Skill result = skillService.updateSkill(1, skillDetails);
+
+        assertEquals("Python", result.getName());
+    }
+
+    @Test
+    void patchSkill_updatesName_whenNameProvided() {
+        Skill existingSkill = new Skill();
+        existingSkill.setId(1);
+        existingSkill.setName("Java");
+
+        Skill skillDetails = new Skill();
+        skillDetails.setName("Python");
+
+        when(skillRepository.findById(1)).thenReturn(Optional.of(existingSkill));
+        when(skillRepository.save(existingSkill)).thenReturn(existingSkill);
+
+        Skill result = skillService.patchSkill(1, skillDetails);
+
+        assertEquals("Python", result.getName());
+    }
+
+    @Test
+    void patchSkill_keepsOriginalName_whenNameIsNull() {
+        Skill existingSkill = new Skill();
+        existingSkill.setId(1);
+        existingSkill.setName("Java");
+
+        Skill skillDetails = new Skill();
+        skillDetails.setName(null);
+
+        when(skillRepository.findById(1)).thenReturn(Optional.of(existingSkill));
+        when(skillRepository.save(existingSkill)).thenReturn(existingSkill);
+
+        Skill result = skillService.patchSkill(1, skillDetails);
+
+        assertEquals("Java", result.getName());
+    }
+
+    @Test
+    void deleteSkill_callsRepositoryDeleteById() {
+        skillService.deleteSkill(1);
+
+        verify(skillRepository).deleteById(1);
     }
 }
