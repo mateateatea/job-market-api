@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import com.mati.job_market_api.exception.ResourceNotFoundException;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.verify;
 
 import java.util.Optional;
 
@@ -73,5 +74,46 @@ class CompanyServiceTest{
         Company result = companyService.updateCompany(1, companyDetails);
 
         assertEquals("NVIDIA", result.getName());
+    }
+
+    @Test
+    void patchCompany_updatesName_whenNameProvided() {
+        Company existingCompany = new Company();
+        existingCompany.setCompanyId(1);
+        existingCompany.setName("Apple");
+
+        Company companyDetails = new Company();
+        companyDetails.setName("NVIDIA");
+
+        when(companyRepository.findById(1)).thenReturn(Optional.of(existingCompany));
+        when(companyRepository.save(existingCompany)).thenReturn(existingCompany);
+
+        Company result = companyService.patchCompany(1, companyDetails);
+
+        assertEquals("NVIDIA", result.getName());
+    }
+
+    @Test
+    void patchCompany_keepsOriginalName_whenNameIsNull() {
+        Company existingCompany = new Company();
+        existingCompany.setCompanyId(1);
+        existingCompany.setName("Apple");
+
+        Company companyDetails = new Company();
+        companyDetails.setName(null);
+
+        when(companyRepository.findById(1)).thenReturn(Optional.of(existingCompany));
+        when(companyRepository.save(existingCompany)).thenReturn(existingCompany);
+
+        Company result = companyService.patchCompany(1, companyDetails);
+
+        assertEquals("Apple", result.getName());
+    }
+
+    @Test
+    void deleteCompany_callsRepositoryDeleteById() {
+        companyService.deleteCompany(1);
+
+        verify(companyRepository).deleteById(1);
     }
 }
