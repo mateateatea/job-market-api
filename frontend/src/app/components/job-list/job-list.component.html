@@ -1,0 +1,23 @@
+<h2>Job Listings</h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Company</th>
+    <th>City</th>
+    <th>Work Model</th>
+    <th>Seniority</th>
+    <th>Skills</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let job of jobs()">
+    <td>{{ job.title }}</td>
+    <td>{{ job.company?.name }}</td>
+    <td>{{ job.city }}</td>
+    <td>{{ job.workModel }}</td>
+    <td>{{ job.seniority }}</td>
+    <td>{{ job.skills.map(s => s.name).join(', ') }}</td>  </tr>
+  </tbody>
+</table>
