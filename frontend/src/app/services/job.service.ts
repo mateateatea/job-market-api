@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Job } from '../models/job.model';
+import { Job, NewJob } from '../models/job.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ export class JobService {
     return this.http.get<Job[]>(this.baseUrl);
   }
 
-  createJob(job: Job): Observable<Job> {
+  createJob(job: NewJob): Observable<Job> {
     return this.http.post<Job>(this.baseUrl, job);
   }
 }

@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddJobForm } from './add-job-form';
+import { AddJobFormComponent } from './add-job-form';
 
-describe('AddJobForm', () => {
-  let component: AddJobForm;
-  let fixture: ComponentFixture<AddJobForm>;
+describe('AddJobFormComponent', () => {
+  let component: AddJobFormComponent;
+  let fixture: ComponentFixture<AddJobFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddJobForm],
+      imports: [AddJobFormComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AddJobForm);
+    fixture = TestBed.createComponent(AddJobFormComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

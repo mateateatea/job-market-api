@@ -12,6 +12,7 @@
   </tr>
   </thead>
   <tbody>
+  <app-add-job-form (jobAdded)="onJobAdded()"></app-add-job-form>
   <tr *ngFor="let job of jobs()">
     <td>{{ job.title }}</td>
     <td>{{ job.company?.name }}</td>

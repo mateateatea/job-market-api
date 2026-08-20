@@ -20,3 +20,15 @@ export interface Job {
   company: Company;
   skills: Skill[];
 }
+
+export interface NewJob {
+  title: string;
+  company: { companyId: number };
+  city: string;
+  workModel: string;
+  seniority: string;
+  source: string;
+  datePosted: string;
+  link: string;
+  skills: { id: number }[];
+}
