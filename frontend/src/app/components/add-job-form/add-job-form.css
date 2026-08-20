@@ -1,0 +1,121 @@
+.job-form {
+  margin: 0 0 2rem;
+  padding: 1.5rem;
+  border: 1px solid #e2e2e2;
+  border-radius: 10px;
+  background: #fafafa;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.job-form h3 {
+  margin: 0 0 1.25rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 0.35rem;
+}
+
+.hint {
+  font-weight: 400;
+  color: #999;
+  font-size: 0.75rem;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  max-width: 240px;
+  box-sizing: border-box;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  background: white;
+}
+.field input:focus,
+.field select:focus {
+  outline: none;
+  border-color: #4a6cf7;
+  box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.15);
+}
+
+.field select[multiple] {
+  height: 100px;
+}
+
+button[type='submit'] {
+  margin-top: 1.25rem;
+  padding: 0.55rem 1.4rem;
+  background: #4a6cf7;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+button[type='submit']:hover:not(:disabled) {
+  background: #3a5ce0;
+}
+
+button[type='submit']:disabled {
+  background: #c7c7c7;
+  cursor: not-allowed;
+}
+
+
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.skill-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: #f8f9fb;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  user-select: none;
+}
+
+.skill-chip:has(input:checked) {
+  background: #e8eefc;
+  border-color: #4a6cf7;
+  color: #3355cc;
+}
+
+.skill-chip input {
+  accent-color: #4a6cf7;
+}

@@ -11,6 +11,7 @@ import { Company, Skill, NewJob } from '../../models/job.model';
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './add-job-form.html',
+  styleUrl: './add-job-form.css',
 })
 export class AddJobFormComponent implements OnInit {
   @Output() jobAdded = new EventEmitter<void>();
@@ -35,7 +36,7 @@ export class AddJobFormComponent implements OnInit {
       source: [''],
       datePosted: [''],
       link: [''],
-      skillIds: [[]],
+      skillIds: [[] as number[]],
     });
   }
 
@@ -65,9 +66,10 @@ export class AddJobFormComponent implements OnInit {
       this.jobAdded.emit();
     });
   }
-  onSkillsChange(event: Event): void {
-    const select = event.target as HTMLSelectElement;
-    const selectedIds = Array.from(select.selectedOptions).map((opt) => Number(opt.value));
-    this.form.patchValue({ skillIds: selectedIds });
+  toggleSkill(id: number, event: Event): void {
+    const checked = (event.target as HTMLInputElement).checked;
+    const current: number[] = this.form.value.skillIds ?? [];
+    const updated = checked ? [...current, id] : current.filter((sid) => sid !== id);
+    this.form.patchValue({ skillIds: updated });
   }
 }

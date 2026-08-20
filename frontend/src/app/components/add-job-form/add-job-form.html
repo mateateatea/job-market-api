@@ -1,64 +1,71 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <div>
-    <label>Title</label>
-    <input type="text" formControlName="title" />
-  </div>
+<form class="job-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h3>Add a new job</h3>
 
-  <div>
-    <label>Company</label>
-    <select formControlName="companyId">
-      <option [ngValue]="null" disabled>Select a company</option>
-      @for (c of companies(); track c.companyId) {
-        <option [ngValue]="c.companyId">{{ c.name }}</option>
-      }
-    </select>
-  </div>
+  <div class="form-grid">
+    <div class="field">
+      <label>Title</label>
+      <input type="text" formControlName="title" />
+    </div>
 
-  <div>
-    <label>City</label>
-    <input type="text" formControlName="city" />
-  </div>
+    <div class="field">
+      <label>Company</label>
+      <select formControlName="companyId">
+        <option [ngValue]="null" disabled>Select a company</option>
+        @for (c of companies(); track c.companyId) {
+          <option [ngValue]="c.companyId">{{ c.name }}</option>
+        }
+      </select>
+    </div>
 
-  <div>
-    <label>Work model</label>
-    <select formControlName="workModel">
-      <option value="remote">Remote</option>
-      <option value="hybrid">Hybrid</option>
-      <option value="onsite">Onsite</option>
-    </select>
-  </div>
+    <div class="field">
+      <label>City</label>
+      <input type="text" formControlName="city" />
+    </div>
 
-  <div>
-    <label>Seniority</label>
-    <select formControlName="seniority">
-      <option value="junior">Junior</option>
-      <option value="mid">Mid</option>
-      <option value="senior">Senior</option>
-    </select>
-  </div>
+    <div class="field">
+      <label>Work model</label>
+      <select formControlName="workModel">
+        <option value="remote">Remote</option>
+        <option value="hybrid">Hybrid</option>
+        <option value="onsite">Onsite</option>
+      </select>
+    </div>
 
-  <div>
-    <label>Source</label>
-    <input type="text" formControlName="source" />
-  </div>
+    <div class="field">
+      <label>Seniority</label>
+      <select formControlName="seniority">
+        <option value="junior">Junior</option>
+        <option value="mid">Mid</option>
+        <option value="senior">Senior</option>
+      </select>
+    </div>
 
-  <div>
-    <label>Date posted</label>
-    <input type="date" formControlName="datePosted" />
-  </div>
+    <div class="field">
+      <label>Source</label>
+      <input type="text" formControlName="source" />
+    </div>
 
-  <div>
-    <label>Link</label>
-    <input type="text" formControlName="link" />
-  </div>
+    <div class="field">
+      <label>Date posted</label>
+      <input type="date" formControlName="datePosted" />
+    </div>
 
-  <div>
-    <label>Skills</label>
-    <select multiple (change)="onSkillsChange($event)">
-      @for (s of skills(); track s.id) {
-        <option [value]="s.id">{{ s.name }}</option>
-      }
-    </select>
+    <div class="field">
+      <label>Link</label>
+      <input type="text" formControlName="link" />
+    </div>
+
+    <div class="field">
+      <label>Skills</label>
+      <div class="skills-grid">
+        @for (s of skills(); track s.id) {
+          <label class="skill-chip">
+            <input type="checkbox" [value]="s.id" (change)="toggleSkill(s.id, $event)" />
+            {{ s.name }}
+          </label>
+        }
+      </div>
+    </div>
   </div>
 
   <button type="submit" [disabled]="form.invalid">Add job</button>
