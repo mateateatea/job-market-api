@@ -1,5 +1,14 @@
-@for (skill of skills(); track skill.id) {
-  <div>{{ skill.name }}</div>
-} @empty {
-  <p>There is no skills to show.</p>
-}
+<div class="skills-page">
+  <h2>Skills</h2>
+
+  <form class="skill-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <input type="text" formControlName="name" placeholder="Skill name" />
+    <button type="submit" [disabled]="form.invalid">Add skill</button>
+  </form>
+
+  @for (skill of skills(); track skill.id) {
+    <div class="skill-item">{{ skill.name }}</div>
+  } @empty {
+    <p>There is no skills to show.</p>
+  }
+</div>
