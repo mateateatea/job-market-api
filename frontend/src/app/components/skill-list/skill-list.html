@@ -1,1 +1,5 @@
-<p>skill-list works!</p>
+@for (skill of skills(); track skill.id) {
+  <div>{{ skill.name }}</div>
+} @empty {
+  <p>There is no skills to show.</p>
+}
