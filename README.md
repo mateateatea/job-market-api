@@ -93,6 +93,8 @@ The checks recorded during development covered:
 
 ![Skill statistics in Postman](screenshots/postman-skill-stats.png)
 
+![Structured 404 response in Postman](screenshots/postman-404-response.png)
+
 ### Automated tests
 
 The backend contains **27 database-independent service tests** using JUnit 5 and Mockito:
@@ -107,8 +109,6 @@ The backend contains **27 database-independent service tests** using JUnit 5 and
 Repository dependencies are mocked, so the tests do not change real database data.
 
 The `Tests` GitHub Actions workflow runs this suite on every push and pull request to `main`. The generated Spring context-load test is excluded because it requires a configured PostgreSQL datasource, which the CI runner does not provide.
-
-![Structured 404 response in Postman](screenshots/postman-404-response.png)
 
 From `backend/`, run the same database-independent suite used by CI:
 
