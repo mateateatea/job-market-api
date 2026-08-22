@@ -51,7 +51,7 @@ The project was developed with JDK 25 and the CI workflow uses JDK 25; Maven com
 
 The API maps onto the existing `companies`, `jobs`, `skills`, `job_skills`, and `contracts` tables created in the companion SQL project. Hibernate schema generation is disabled, so the database structure remains managed outside this application.
 
-![Job market database ER diagram](screenshots/job-market-er-diagram.png)
+![Job market database ER diagram](screenshots/erd_diagram.png)
 
 ## API endpoints
 
